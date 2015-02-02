@@ -16,3 +16,22 @@ When you view changes in a file, Git handles line endings in its own way. Since 
 
 **Using** .gitattributes file you can overcome this problem most effectively. You can read more here https://help.github.com/articles/dealing-with-line-endings/
 
+
+
+Please Contribute
+-------------------
+
+
+The project is not even in its beta. You are highly encouraged to contribute to it. 
+
+The heart of this generator is *gitattributes_generator.js*. It contains a function which accepts an object.  The code is well documented. Please let me know if you aren't able to understand any portion. I will end this with an example usage...
+
+
+> var obj = {
+> text: ['c', 'js', 'json',],
+> binary:['jpeg'],
+> lf:[ ],
+> crlf: ['vproj', 'sln']
+> };
+> gitattributesGenerator(obj);
+
