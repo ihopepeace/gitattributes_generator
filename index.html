@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>.gitattributes Generator</title>
+        <script src="./main.js"></script>
+        <script src="./FileSaver.min.js"></script>
+        <script type=text/javascript>
+            window.onload = main;
+        </script>
+    </head>
+    <body>
+        <h1>.gitattributes Generator</h1>
+        <div>
+        <ul> 
+            <li>Binary Files: Input files that are truly binary.</li>
+            <li>CRLF Files: Input files that should have CRLF line endings on checkout.</li>
+            <li>LF Files: Input files that should have LF line endings on checkout.</li>
+            <li>Text Files: Input files that contains text only and don't have any special line ending requirements.</li>
+         </ul>
+         <p>
+            <strong>Note:</strong> Input Format - Comma seperated list of file extensions without prefix dot. 
+         </p>
+         </div>
+        <form action="javascript:void(0);" id="myForm">
+            <p><label>Binary Files<br /><input type="text" name="binary" id="binary" placeholder="eg: jpeg, png" /></label></p>
+            <p><label>CRLF Files<br /><input type="text" name="crlf" id="crlf" placeholder="eg: bat, sln, vcproj" /></label></p>
+            <p><label>LF Files<br /><input type="text" name="lf" id="lf" placeholder="eg: cpp, c" /></label></p>
+            <p><label>Text Files<br /><input type="text" name="text" id="text" placeholder="eg: js, json, md" /></label></p>
+            <p><button id="gen">Generate</button></p>
+        </form>
+        <p>File will be available for download instantly. After downloading, rename the file to .gitattributes and put it into the root of your repository</p>
+        <p><a href="https://github.com/ihopepeace/gitattributes_generator">.gitattributes Generator @github</a></p>
+    </body>
+</html>
