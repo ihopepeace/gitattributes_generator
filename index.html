@@ -1,36 +1,132 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>.gitattributes Generator</title>
-        <script src="./main.js"></script>
-        <script src="./FileSaver.min.js"></script>
-        <script type=text/javascript>
-            window.onload = main;
-        </script>
-    </head>
-    <body>
-        <h1>.gitattributes Generator</h1>
-        <h3>Generates .gitattributes file for your project.</h3>
-        <div>
-        <ul> 
-            <li>Binary Files: Input files that are truly binary.</li>
-            <li>CRLF Files: Input files that should have CRLF line endings on checkout.</li>
-            <li>LF Files: Input files that should have LF line endings on checkout.</li>
-            <li>Text Files: Input files that contains text only and don't have any special line ending requirements.</li>
-         </ul>
-         <p>
-            <strong>Note:</strong> Input Format - Comma seperated list of file extensions without prefix dot. 
-         </p>
-         </div>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gitattributes Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/material-components-web/dist/material-components-web.min.css,npm/normalize.css/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            position: relative;
+            user-select: none;
+            padding: 20px;
+        }
+
+        body > header > h1 > svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        body > main > ul {
+            max-width: 600px;
+        }
+    </style>
+</head>
+
+<body class="mdc-typography">
+    <header>
+        <h1 class="mdc-typography--headline3"><svg viewBox="0 0 24 24">
+                <path d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z" />
+            </svg>Gitattributes Generator</h1>
+        <h3 class="mdc-typography--headline5">Generates .gitattributes files for your project.</h3>
+    </header>
+    <main>
+        <ul class="mdc-list mdc-list--two-line" aria-orientation="vertical">
+            <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">Binary Files</span>
+                <span class="mdc-list-item__secondary-text">Input files that are truly binary.</span>
+                </span>
+            </li>
+            <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">CRLF Files</span>
+                <span class="mdc-list-item__secondary-text">Input files that should have CRLF line endings on checkout.</span>
+                </span>
+            </li>
+            <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">LF Files</span>
+                <span class="mdc-list-item__secondary-text">Input files that should have LF line endings on checkout.</span>
+                </span>
+            </li>
+            <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
+                <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">Text Files</span>
+                <span class="mdc-list-item__secondary-text">Input files that contains text only and don't have any special line ending requirements.</span>
+                </span>
+            </li>
+        </ul>
+        <p class="mdc-typography--body2">Enter the values as a comma seperated list of file extensions without the prefix dot.</p>
         <form action="javascript:void(0);" id="myForm">
-            <p><label>Binary Files<br /><input type="text" name="binary" id="binary" placeholder="eg: jpeg, png" /></label></p>
-            <p><label>CRLF Files<br /><input type="text" name="crlf" id="crlf" placeholder="eg: bat, sln, vcproj" /></label></p>
-            <p><label>LF Files<br /><input type="text" name="lf" id="lf" placeholder="eg: cpp, c" /></label></p>
-            <p><label>Text Files<br /><input type="text" name="text" id="text" placeholder="eg: js, json, md" /></label></p>
-            <p><button id="gen">Generate</button></p>
+            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+                <input type="text" id="binary" class="mdc-text-field__input">
+                <label for="binary" class="mdc-floating-label">Binary Files</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path" />
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+            <br>
+            <br>
+            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+                <input type="text" id="crlf" class="mdc-text-field__input">
+                <label for="crlf" class="mdc-floating-label">CRLF Files</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path" />
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+            <br>
+            <br>
+            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+                <input type="text" id="lf" class="mdc-text-field__input">
+                <label for="lf" class="mdc-floating-label">LF Files</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path" />
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+            <br>
+            <br>
+            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+                <input type="text" id="text" class="mdc-text-field__input">
+                <label for="text" class="mdc-floating-label">Text Files</label>
+                <div class="mdc-notched-outline">
+                    <svg>
+                        <path class="mdc-notched-outline__path" />
+                    </svg>
+                </div>
+                <div class="mdc-notched-outline__idle"></div>
+            </div>
+            <p>
+                <button class="mdc-button mdc-button--outlined" id="gen" data-mdc-auto-init="MDCRipple">Generate</button>
+            </p>
         </form>
-        <p>File will be available for download instantly. After downloading, rename the file to .gitattributes and put it into the root of your repository</p>
-        <p><a href="https://github.com/ihopepeace/gitattributes_generator">.gitattributes Generator @github</a></p>
-    </body>
+        <p class="mdc-typography--body2">File will download instantly. After downloading, rename the file to .gitattributes and put it into the root of your repository</p>
+    </main>
+    <footer>
+        <nav>
+            <a target="_blank" ref="noopener" href="https://github.com/ihopepeace/gitattributes_generator">Gitattributes Generator on GitHub</a>
+        </nav>
+        <script async src="main.js"></script>
+        <script async src="FileSaver.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/combine/npm/material-components-web/dist/material-components-web.min.js,npm/html5shiv/dist/html5shiv-printshiv.min.js"></script>
+        <script>
+            window.mdc.autoInit();
+        </script>
+    </footer>
+</body>
+
 </html>
