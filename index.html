@@ -6,112 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gitattributes Generator</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/material-components-web/dist/material-components-web.min.css,npm/normalize.css/normalize.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="https://unpkg.com/material-components-web@0.43.1/dist/material-components-web.min.css">
+
     <style>
+        :root {
+            --mdc-theme-primary: #3f51b5;
+            --mdc-theme-secondary: #f44336;
+            --mdc-theme-on-primary: #ffffff;
+            --mdc-theme-on-secondary: #ffffff;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
             position: relative;
-            user-select: none;
             padding: 20px;
         }
 
-        body > header > h1 > svg {
+        .title--svg {
             width: 40px;
             height: 40px;
         }
 
-        body > main > ul {
-            max-width: 600px;
+        .filetypes,
+        .typesform--input {
+            width: 100%;
         }
     </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+
 </head>
 
 <body class="mdc-typography">
     <header>
-        <h1 class="mdc-typography--headline3"><svg viewBox="0 0 24 24">
+        <h1 class="mdc-typography--headline3 title"><svg class="title--svg" viewBox="0 0 24 24">
                 <path d="M2.6,10.59L8.38,4.8L10.07,6.5C9.83,7.35 10.22,8.28 11,8.73V14.27C10.4,14.61 10,15.26 10,16A2,2 0 0,0 12,18A2,2 0 0,0 14,16C14,15.26 13.6,14.61 13,14.27V9.41L15.07,11.5C15,11.65 15,11.82 15,12A2,2 0 0,0 17,14A2,2 0 0,0 19,12A2,2 0 0,0 17,10C16.82,10 16.65,10 16.5,10.07L13.93,7.5C14.19,6.57 13.71,5.55 12.78,5.16C12.35,5 11.9,4.96 11.5,5.07L9.8,3.38L10.59,2.6C11.37,1.81 12.63,1.81 13.41,2.6L21.4,10.59C22.19,11.37 22.19,12.63 21.4,13.41L13.41,21.4C12.63,22.19 11.37,22.19 10.59,21.4L2.6,13.41C1.81,12.63 1.81,11.37 2.6,10.59Z" />
             </svg>Gitattributes Generator</h1>
-        <h3 class="mdc-typography--headline5">Generates .gitattributes files for your project.</h3>
+        <h2 class="mdc-typography--headline5">Generates .gitattributes files for your project.</h2>
     </header>
     <main>
-        <ul class="mdc-list mdc-list--two-line" aria-orientation="vertical">
+        <ul class="filetypes mdc-list mdc-list--two-line" aria-orientation="vertical">
             <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
                 <span class="mdc-list-item__text">
                     <span class="mdc-list-item__primary-text">Binary Files</span>
-                <span class="mdc-list-item__secondary-text">Input files that are truly binary.</span>
+                <span class="mdc-list-item__secondary-text">Input files that are truly binary. This includes jpeg and png.</span>
                 </span>
             </li>
             <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
                 <span class="mdc-list-item__text">
                     <span class="mdc-list-item__primary-text">CRLF Files</span>
-                <span class="mdc-list-item__secondary-text">Input files that should have CRLF line endings on checkout.</span>
+                <span class="mdc-list-item__secondary-text">Input files that should have CRLF line endings on checkout. This includes vproj, sln and bat</span>
                 </span>
             </li>
             <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
                 <span class="mdc-list-item__text">
                     <span class="mdc-list-item__primary-text">LF Files</span>
-                <span class="mdc-list-item__secondary-text">Input files that should have LF line endings on checkout.</span>
+                <span class="mdc-list-item__secondary-text">Input files that should have LF line endings on checkout. This includes cpp.</span>
                 </span>
             </li>
             <li class="mdc-list-item" data-mdc-auto-init="MDCRipple">
                 <span class="mdc-list-item__text">
                     <span class="mdc-list-item__primary-text">Text Files</span>
-                <span class="mdc-list-item__secondary-text">Input files that contains text only and don't have any special line ending requirements.</span>
+                <span class="mdc-list-item__secondary-text">Input files that contains text only and don't have any special line ending requirements. This includes js and c.</span>
                 </span>
             </li>
         </ul>
-        <p class="mdc-typography--body2">Enter the values as a comma seperated list of file extensions without the prefix dot.</p>
-        <form action="javascript:void(0);" id="myForm">
-            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <p class="mdc-typography--body2">Enter file extensions with a comma seperator.</p>
+        <form action="javascript:void(0);" id="myForm" class="typesform">
+            <div id="binary-div" class="mdc-text-field mdc-text-field--outlined typesform--input" data-mdc-auto-init="MDCTextField">
                 <input type="text" id="binary" class="mdc-text-field__input">
-                <label for="binary" class="mdc-floating-label">Binary Files</label>
                 <div class="mdc-notched-outline">
-                    <svg>
-                        <path class="mdc-notched-outline__path" />
-                    </svg>
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="binary" class="mdc-floating-label">Binary Files</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
                 </div>
-                <div class="mdc-notched-outline__idle"></div>
             </div>
             <br>
             <br>
-            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+            <div id="crlf-div" class="mdc-text-field mdc-text-field--outlined typesform--input" data-mdc-auto-init="MDCTextField">
                 <input type="text" id="crlf" class="mdc-text-field__input">
-                <label for="crlf" class="mdc-floating-label">CRLF Files</label>
                 <div class="mdc-notched-outline">
-                    <svg>
-                        <path class="mdc-notched-outline__path" />
-                    </svg>
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="crlf" class="mdc-floating-label">CRLF Files</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
                 </div>
-                <div class="mdc-notched-outline__idle"></div>
             </div>
             <br>
             <br>
-            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+            <div id="lf-div" class="mdc-text-field mdc-text-field--outlined typesform--input" data-mdc-auto-init="MDCTextField">
                 <input type="text" id="lf" class="mdc-text-field__input">
-                <label for="lf" class="mdc-floating-label">LF Files</label>
                 <div class="mdc-notched-outline">
-                    <svg>
-                        <path class="mdc-notched-outline__path" />
-                    </svg>
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="lf" class="mdc-floating-label">LF Files</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
                 </div>
-                <div class="mdc-notched-outline__idle"></div>
             </div>
             <br>
             <br>
-            <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+            <div id="text-div" class="mdc-text-field mdc-text-field--outlined typesform--input" data-mdc-auto-init="MDCTextField">
                 <input type="text" id="text" class="mdc-text-field__input">
-                <label for="text" class="mdc-floating-label">Text Files</label>
                 <div class="mdc-notched-outline">
-                    <svg>
-                        <path class="mdc-notched-outline__path" />
-                    </svg>
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch">
+                        <label for="text" class="mdc-floating-label">Text Files</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
                 </div>
-                <div class="mdc-notched-outline__idle"></div>
             </div>
             <p>
-                <button class="mdc-button mdc-button--outlined" id="gen" data-mdc-auto-init="MDCRipple">Generate</button>
+                <button class="mdc-fab mdc-fab--extended" id="gen" data-mdc-auto-init="MDCRipple">
+
+                    <svg class="mdc-fab__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="none" d="M0 0h24v24H0V0z" />
+                        <path d="M19 12v7H5v-7H3v7c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-7h-2zm-6 .67l2.59-2.58L17 11.5l-5 5-5-5 1.41-1.41L11 12.67V3h2v9.67z" />
+                    </svg>
+                    <span class="mdc-fab__label">Generate</span>
+                </button>
             </p>
         </form>
         <p class="mdc-typography--body2">File will download instantly. After downloading, rename the file to .gitattributes and put it into the root of your repository</p>
@@ -120,11 +138,65 @@
         <nav>
             <a target="_blank" ref="noopener" href="https://github.com/ihopepeace/gitattributes_generator">Gitattributes Generator on GitHub</a>
         </nav>
-        <script async src="main.js"></script>
-        <script async src="FileSaver.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/combine/npm/material-components-web/dist/material-components-web.min.js,npm/html5shiv/dist/html5shiv-printshiv.min.js"></script>
+
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+        <script async src="https://cdn.jsdelivr.net/gh/ihopepeace/gitattributes_generator/gitattributes_generator.min.js"></script>
+
+        <script src="https://unpkg.com/material-components-web@0.43.1/dist/material-components-web.min.js"></script>
         <script>
             window.mdc.autoInit();
+
+            var pattern = /\s*,\s*/;
+            var obj = {};
+
+            document.getElementById("gen").addEventListener("click", function() {
+                obj = {}
+
+                obj.text = document.getElementById('text').value.split(pattern)[0] ? document.getElementById('text').value.split(pattern) : null;
+                document.getElementById('text-div').MDCTextField.value = '';
+
+                obj.binary = document.getElementById('binary').value.split(pattern)[0] ? document.getElementById('binary').value.split(pattern) : null;
+                document.getElementById('binary-div').MDCTextField.value = '';
+
+                obj.crlf = document.getElementById('crlf').value.split(pattern)[0] ? document.getElementById('crlf').value.split(pattern) : null;
+                document.getElementById('crlf-div').MDCTextField.value = '';
+
+                obj.lf = document.getElementById('lf').value.split(pattern)[0] ? document.getElementById('lf').value.split(pattern) : null;
+                document.getElementById('lf-div').MDCTextField.value = '';
+
+                var binaryFiles = obj.binary || [],
+                    crlfFiles = obj.crlf || [],
+                    lfFiles = obj.lf || [],
+                    textFiles = obj.text || [];
+                var header = '# This file has been generated using \'.gitattributes Generator\'.\n# You can generate yours at http://ihopepeace.github.io/gitattributes_generator\n\n* text=auto\n',
+                    buf_b = '# Declare files that are truly binary and shouldn\'t be modified.\n',
+                    buf_c = '# Declare files that should have CRLF line endings on checkout.\n',
+                    buf_l = '# Declare files that should have LF line endings on checkout.\n',
+                    buf_t = '# Explicitly declare text files that should be normalized and converted\n# to native line endings on checkout.\n';
+                var i, length;
+                length = binaryFiles.length;
+                for (i = 0; i < length; ++i) {
+                    buf_b += ('*.' + binaryFiles[i] + ' binary\n');
+                }
+                length = crlfFiles.length;
+                for (i = 0; i < length; ++i) {
+                    buf_c += ('*.' + crlfFiles[i] + ' eol=crlf\n');
+                }
+                length = lfFiles.length;
+                for (i = 0; i < length; ++i) {
+                    buf_l += ('*.' + lfFiles[i] + ' eol=lf\n');
+                }
+                length = textFiles.length;
+                for (i = 0; i < length; ++i) {
+                    buf_t += ('*.' + textFiles[i] + ' text\n');
+                }
+                var blob = new Blob([header + '\n' + buf_t + '\n' + buf_c + '\n' + buf_l + '\n' + buf_b + '\n'], {
+                    type: "text/plain;charset=utf-8;",
+                });
+                saveAs(blob, "my.gitattributes");
+            })
         </script>
     </footer>
 </body>
